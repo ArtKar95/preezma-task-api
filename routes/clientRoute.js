@@ -24,29 +24,37 @@ router.post(
       const condidate = await Client.findOne({ email });
 
       if (condidate) {
-        return res
-          .status(400)
-          .json({ message: 'User with email address already exist' });
+        return res.status(400).json({
+          success: false,
+          message: 'User with email address already exist',
+        });
       }
 
       const client = new Client({ name, email, phone, providers });
       await client.save();
-      res.status(200).json({ message: 'Client created', client });
+      res.status(200).json({
+        success: true,
+        message: 'Client created successfully',
+        client,
+      });
     } catch (e) {
-      res.status(500).json({ message: 'Something wrong, try later.' });
+      res.status(500).json({
+        success: false,
+        message: 'Something wrong, please try later.',
+      });
     }
   }
 );
 
 router.get(
-  '/clients',
+  '/client',
 
   async (req, res) => {
     try {
       const clients = await Client.find({});
       res.status(200).json(clients);
     } catch (e) {
-      res.status(500).json({ message: 'Something wrong, try later.' });
+      res.status(500).json({ message: 'Something wrong, please try later.' });
     }
   }
 );
@@ -63,11 +71,15 @@ router.get(
         await client.save();
         res.status(200).json(client);
       }
-      return res
-        .status(404)
-        .json({ message: 'User with email address already exist' });
+      return res.status(404).json({
+        success: false,
+        message: 'User with email address already exist',
+      });
     } catch (e) {
-      res.status(500).json({ message: 'Something wrong, try later.' });
+      res.status(500).json({
+        success: false,
+        message: 'Something wrong, please try later.',
+      });
     }
   }
 );
@@ -97,9 +109,11 @@ router.put(
       );
 
       client.save();
-      res.status(200).json({ message: 'Client edited', client });
+      res
+        .status(200)
+        .json({ success: true, message: 'Client edited successfully', client });
     } catch (e) {
-      res.status(404).json({ message: 'Client not found' });
+      res.status(404).json({ success: false, message: 'Client not found' });
     }
   }
 );
@@ -109,11 +123,13 @@ router.delete('/client/:id', async (req, res) => {
     const client = await Client.findByIdAndRemove({ _id: req.params.id });
 
     client.save();
-    res.status(200).json({ success: true, message: 'Deleted successfully' });
+    res
+      .status(200)
+      .json({ success: true, message: 'Client deleted successfully' });
   } catch (e) {
     res
       .status(500)
-      .json({ success: false, message: 'Something wrong, try later.' });
+      .json({ success: false, message: 'Something wrong, please try later.' });
   }
 });
 

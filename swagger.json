@@ -25,7 +25,7 @@
   "consumes": ["application/json"],
   "produces": ["application/json"],
   "paths": {
-    "/clients": {
+    "/client": {
       "post": {
         "tags": ["Clients"],
         "summary": "Create a new client",
@@ -212,10 +212,8 @@
             "description": "Unexpected error"
           }
         }
-      }
-    },
+      },
 
-    "/providers": {
       "get": {
         "tags": ["Providers"],
         "summary": "Get all providers",

@@ -28,24 +28,31 @@ router.post(
 
       const provider = new Provider({ name });
       await provider.save();
-      res
-        .status(200)
-        .json({ message: 'Provider created successfully', provider });
+      res.status(200).json({
+        success: true,
+        message: 'Provider created successfully',
+        provider,
+      });
     } catch (e) {
-      res.status(500).json({ message: 'Something wrong, try later.' });
+      res
+        .status(500)
+        .json({
+          success: false,
+          message: 'Something wrong, please try later.',
+        });
     }
   }
 );
 
 router.get(
-  '/providers',
+  '/provider',
 
   async (req, res) => {
     try {
       const providers = await Provider.find({});
       res.status(200).json(providers);
     } catch (e) {
-      res.status(500).json({ message: 'Something wrong, try later.' });
+      res.status(500).json({ message: 'Something wrong, please try later.' });
     }
   }
 );
@@ -62,7 +69,7 @@ router.get(
       await provider.save();
       res.status(200).json(provider);
     } catch (e) {
-      res.status(500).json({ message: 'Something wrong, try later.' });
+      res.status(500).json({ message: 'Something wrong, please try later.' });
     }
   }
 );
@@ -89,9 +96,13 @@ router.put(
       );
 
       provider.save();
-      res.status(200).json({ message: 'Provider edited', provider });
+      res.status(200).json({
+        success: true,
+        message: 'Provider edited successfully',
+        provider,
+      });
     } catch (e) {
-      res.status(404).json({ message: 'Provider not found' });
+      res.status(404).json({ success: false, message: 'Provider not found' });
     }
   }
 );
@@ -101,9 +112,11 @@ router.delete('/provider/:id', async (req, res) => {
     const provider = await Provider.findByIdAndRemove({ _id: req.params.id });
 
     provider.save();
-    res.status(200).json({ message: 'Deleted successfully', provider });
+    res
+      .status(200)
+      .json({ message: 'Provider deleted successfully', provider });
   } catch (e) {
-    res.status(500).json({ message: 'Something wrong, try later.' });
+    res.status(500).json({ message: 'Something wrong, please try later.' });
   }
 });
 
