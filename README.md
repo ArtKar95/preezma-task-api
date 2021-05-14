@@ -8,7 +8,8 @@ You will need install `Node.js`and `npm`.
 
 ## Project installation and usage
 
-cd preezma-task
+git clone https://github.com/ArtKar95/preezma-task-api.git
+cd preezma-task-api
 npm install
 
 Remove `.sample` extension from configuration file located in `/config/env/` and set configs depending on your environment

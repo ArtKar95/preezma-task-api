@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const router = Router();
-const Provider = require('../schemas.js/providerSchema');
+const Provider = require('../schemas/providerSchema');
 const { check, validationResult } = require('express-validator');
 
 router.post(

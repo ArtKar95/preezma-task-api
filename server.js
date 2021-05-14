@@ -11,8 +11,8 @@ app.use(cors());
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(express.json({ extended: true }));
-app.use('/api',require('./routes/clients.routes'));
-app.use('/api', require('./routes/providers.routes'));
+app.use('/api',require('./routes/clientRoute'));
+app.use('/api', require('./routes/providerRoute'));
 
 let port = process.env.PORT || 3001;
 let mongourl = process.env.MONGO_API;

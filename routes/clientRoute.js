@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const router = Router();
-const Client = require('../schemas.js/clientSchema');
+const Client = require('../schemas/clientSchema');
 const { check, validationResult } = require('express-validator');
 
 router.post(
